@@ -1,0 +1,6 @@
+{
+  "name": "NA Fresh - Fruits & Coconuts",
+  "description": "Complete PHP & MySQL ecommerce website for fresh fruits and tender coconuts with mobile-first shopping experience and admin panel.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
