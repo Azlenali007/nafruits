@@ -12,7 +12,7 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥥</text></svg>">
   
   <!-- Tailwind CSS & FontAwesome -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="/assets/css/style.css">
   <style>
@@ -112,26 +112,14 @@
               </div>
             </div>
 
-            <!-- Hero Banner: Fresh Coconut Water (High Contrast Dark Forest-Green on Light Green) -->
-            <div class="rounded-3xl bg-gradient-to-r from-emerald-100 via-green-100 to-emerald-50 border border-emerald-300/80 p-3.5 flex items-center justify-between relative shadow-xs">
-              <div class="space-y-1 max-w-[62%]">
-                <span class="inline-flex items-center space-x-1 bg-[#064e3b] text-[#bbf7d0] text-[9px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  <i class="fas fa-leaf text-[8px] text-lime-300"></i>
-                  <span>Nature's Energy Drink</span>
-                </span>
-                <h3 class="text-base sm:text-lg font-black leading-tight text-[#064e3b]">Fresh<br><span class="text-[#047857]">Coconut Water</span></h3>
-                <p class="text-[10px] text-[#064e3b] font-semibold leading-tight line-clamp-2">Chilled pure raw electrolyte water cut fresh daily.</p>
-                <div class="flex items-center space-x-2 pt-0.5">
-                  <span class="inline-block px-2.5 py-0.5 bg-white text-[#064e3b] text-xs font-black rounded-full border border-emerald-300 shadow-xs">₹ 40</span>
-                  <button class="bg-[#064e3b] hover:bg-[#022c22] text-white font-black text-[10px] px-2.5 py-1 rounded-lg flex items-center space-x-1 shadow-xs">
-                    <i class="fas fa-plus text-[9px]"></i>
-                    <span>Add</span>
-                  </button>
-                </div>
+            <!-- Hero Banner: Fresh Coconut Water -->
+            <div class="rounded-3xl bg-gradient-to-r from-emerald-800 to-lime-600 text-white p-4 flex items-center justify-between relative shadow-md">
+              <div class="space-y-1 max-w-[60%]">
+                <span class="bg-white/20 text-[9px] font-bold px-2 py-0.5 rounded-full uppercase">Nature's Energy Drink</span>
+                <h3 class="text-lg font-black leading-tight">Fresh<br><span class="text-lime-300">Coconut Water</span></h3>
+                <span class="inline-block px-2.5 py-0.5 bg-white text-green-800 text-xs font-black rounded-full mt-1">₹ 40</span>
               </div>
-              <div class="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0 flex items-center justify-center">
-                <img src="https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=600&q=80" alt="Fresh Coconut Water" class="w-full h-full object-cover rounded-2xl drop-shadow-md border-2 border-white">
-              </div>
+              <img src="https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=600&q=80" class="w-24 h-24 object-cover rounded-2xl drop-shadow-md">
             </div>
 
             <!-- Fresh Fruits Section -->
@@ -434,28 +422,13 @@
             </div>
           </div>
 
-          <!-- Fixed Bottom Navigation (Clean, Solid, Docked, Zero Floating Circles) -->
-          <div class="absolute bottom-0 inset-x-0 bg-white border-t border-gray-200 px-2 h-14 grid grid-cols-5 items-center text-gray-400 text-xs shadow-xs">
-            <span class="flex flex-col items-center justify-center text-green-800 font-black">
-              <i class="fas fa-home text-sm"></i>
-              <span class="text-[9px] mt-0.5">Home</span>
-            </span>
-            <span class="flex flex-col items-center justify-center text-gray-500 font-medium">
-              <i class="fas fa-th-large text-sm"></i>
-              <span class="text-[9px] mt-0.5">Categories</span>
-            </span>
-            <span class="flex flex-col items-center justify-center text-green-800 font-bold">
-              <div class="w-6 h-6 rounded-lg bg-green-800 text-white flex items-center justify-center text-[10px] shadow-xs">🥥</div>
-              <span class="text-[9px] mt-0.5 font-bold">Fresh</span>
-            </span>
-            <span class="flex flex-col items-center justify-center text-gray-500 font-medium">
-              <i class="fas fa-shopping-basket text-sm"></i>
-              <span class="text-[9px] mt-0.5">Cart</span>
-            </span>
-            <span class="flex flex-col items-center justify-center text-gray-500 font-medium">
-              <i class="fas fa-user text-sm"></i>
-              <span class="text-[9px] mt-0.5">Profile</span>
-            </span>
+          <!-- Fixed Bottom Navigation (Always Present in Frame) -->
+          <div class="absolute bottom-0 inset-x-0 bg-white border-t border-gray-200 px-3 py-2 flex justify-around text-gray-400 text-xs">
+            <span class="text-green-700 font-bold"><i class="fas fa-home block text-center text-sm"></i>Home</span>
+            <span><i class="fas fa-th-large block text-center text-sm"></i>Categories</span>
+            <div class="relative -top-3 w-8 h-8 rounded-full bg-green-700 text-white flex items-center justify-center text-xs shadow-md">🥥</div>
+            <span><i class="fas fa-shopping-basket block text-center text-sm"></i>Cart</span>
+            <span><i class="fas fa-user block text-center text-sm"></i>Profile</span>
           </div>
 
         </div>

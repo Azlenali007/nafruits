@@ -4,12 +4,7 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // 1. Initialize Lucide Icons if loaded
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
-  }
-
-  // 2. Branded Intro Screen Logic
+  // 1. Branded Intro Screen Logic
   const splash = document.getElementById('brand-splash');
   if (splash) {
     const hasSeenSplash = sessionStorage.getItem('na_splash_seen');
@@ -26,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 3. Setup Toast Notifications
+  // 2. Setup Toast Notifications
   window.showToast = function (message, icon = 'success') {
     if (window.Swal) {
       const Toast = Swal.mixin({
@@ -49,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  // 4. Add to Cart AJAX Helper
+  // 3. Add to Cart AJAX Helper
   document.querySelectorAll('.btn-add-to-cart').forEach(button => {
     button.addEventListener('click', function (e) {
       e.preventDefault();
@@ -63,6 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   window.addToCart = function (productId, unitId, quantity, triggerBtn) {
+    const originalText = triggerBtn ? triggerBtn.innerHTML : null;
     if (triggerBtn) {
       triggerBtn.disabled = true;
       triggerBtn.classList.add('opacity-75');
@@ -111,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 5. Quantity Adjusters on Product & Cart Pages
+  // 4. Quantity Adjusters on Product & Cart Pages
   document.querySelectorAll('.btn-qty-minus').forEach(btn => {
     btn.addEventListener('click', function () {
       const input = this.parentElement.querySelector('input.qty-input');
@@ -136,18 +132,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 7. Homepage Card Quantity Helpers
-  window.adjustCardQty = function (productId, delta) {
-    const el = document.getElementById('card-qty-' + productId);
-    if (!el) return;
-    let current = parseInt(el.textContent, 10) || 1;
-    current = Math.max(1, current + delta);
-    el.textContent = current;
-  };
-
-  window.addCardItemToCart = function (productId, unitId, btn) {
-    const qtyEl = document.getElementById('card-qty-' + productId);
-    const qty = qtyEl ? (parseInt(qtyEl.textContent, 10) || 1) : 1;
-    addToCart(productId, unitId, qty, btn);
-  };
+  // 5. Carousel Horizontal Scroll Buttons
+  document.querySelectorAll('.carousel-scroll-btn').forEach(btn => {
+    btn.addEventListener('click', function () {
+      const targetId = this.getAttribute('data-target');
+      const container = document.getElementById(targetId);
+      const direction = this.getAttribute('data-dir') === 'left' ? -260 : 260;
+      if (container) {
+        container.scrollBy({ left: direction, behavior: 'smooth' });
+      }
+    });
+  });
 });

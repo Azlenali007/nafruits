@@ -23,7 +23,7 @@ try {
     }
 
     $sql = "SELECT p.*, c.name as category_name, c.slug as category_slug, 
-                   u.id as default_unit_id, u.unit_name as default_unit_name, u.price as default_unit_price, u.original_price as default_original_price
+                   u.id as default_unit_id, u.unit_name as default_unit_name, u.price as default_unit_price
             FROM products p 
             LEFT JOIN categories c ON p.category_id = c.id
             LEFT JOIN product_units u ON (u.product_id = p.id AND u.is_default = 1)
@@ -76,17 +76,15 @@ require_once __DIR__ . '/includes/header.php';
     <?php if ($selectedCategorySlug): ?>
       <input type="hidden" name="slug" value="<?= e($selectedCategorySlug) ?>">
     <?php endif; ?>
-    <div class="absolute left-3.5 top-3 text-gray-400">
-      <?= renderIcon('search', 'w-4 h-4 text-gray-400') ?>
-    </div>
+    <i class="fas fa-search absolute left-3.5 top-3.5 text-gray-400 text-sm"></i>
     <input type="search" 
            name="q" 
            value="<?= e($searchQuery) ?>" 
            placeholder="Search fresh mango, tender coconut, apple..." 
-           class="w-full bg-white border border-gray-200 rounded-2xl pl-10 pr-10 py-2.5 text-xs sm:text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:border-emerald-600 focus:ring-1 focus:ring-emerald-600 shadow-xs transition">
+           class="w-full bg-white border border-gray-200 rounded-2xl pl-10 pr-10 py-2.5 text-xs sm:text-sm font-medium text-gray-800 placeholder-gray-400 focus:outline-none focus:border-green-600 focus:ring-1 focus:ring-green-600 shadow-sm transition">
     <?php if ($searchQuery): ?>
       <a href="/category.php<?= $selectedCategorySlug ? '?slug=' . urlencode($selectedCategorySlug) : '' ?>" class="absolute right-3.5 top-3 text-gray-400 hover:text-gray-600">
-        <?= renderIcon('cross', 'w-4 h-4 text-gray-400') ?>
+        <i class="fas fa-times-circle"></i>
       </a>
     <?php endif; ?>
   </form>
@@ -94,12 +92,12 @@ require_once __DIR__ . '/includes/header.php';
   <!-- Categories Horizontal Scroll Bar -->
   <div class="flex space-x-2 overflow-x-auto no-scrollbar py-1">
     <a href="/category.php<?= $searchQuery ? '?q=' . urlencode($searchQuery) : '' ?>" 
-       class="flex-shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition <?= empty($selectedCategorySlug) ? 'bg-emerald-800 text-white shadow-xs' : 'bg-white text-gray-700 border border-gray-150 hover:border-emerald-500' ?>">
+       class="flex-shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition <?= empty($selectedCategorySlug) ? 'bg-green-700 text-white shadow-sm' : 'bg-white text-gray-700 border border-gray-200 hover:border-green-500' ?>">
       All Items
     </a>
     <?php foreach ($categories as $cat): ?>
       <a href="/category.php?slug=<?= urlencode($cat['slug']) ?><?= $searchQuery ? '&q=' . urlencode($searchQuery) : '' ?>" 
-         class="flex-shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition <?= ($selectedCategorySlug === $cat['slug']) ? 'bg-emerald-800 text-white shadow-xs' : 'bg-white text-gray-700 border border-gray-150 hover:border-emerald-500' ?>">
+         class="flex-shrink-0 px-3.5 py-1.5 rounded-xl text-xs font-bold transition <?= ($selectedCategorySlug === $cat['slug']) ? 'bg-green-700 text-white shadow-sm' : 'bg-white text-gray-700 border border-gray-200 hover:border-green-500' ?>">
         <?= e($cat['name']) ?>
       </a>
     <?php endforeach; ?>
@@ -113,7 +111,7 @@ require_once __DIR__ . '/includes/header.php';
 
     <div class="flex items-center space-x-1.5 text-xs">
       <span class="text-gray-500 font-medium">Sort:</span>
-      <select onchange="location = this.value;" class="bg-white border border-gray-200 rounded-xl py-1 px-2.5 text-xs font-bold text-gray-700 focus:outline-none focus:border-emerald-600">
+      <select onchange="location = this.value;" class="bg-white border border-gray-200 rounded-lg py-1 px-2 text-xs font-bold text-gray-700 focus:outline-none focus:border-green-600">
         <option value="?slug=<?= urlencode($selectedCategorySlug) ?>&q=<?= urlencode($searchQuery) ?>&sort=popular" <?= $sortBy === 'popular' ? 'selected' : '' ?>>Popular</option>
         <option value="?slug=<?= urlencode($selectedCategorySlug) ?>&q=<?= urlencode($searchQuery) ?>&sort=price_asc" <?= $sortBy === 'price_asc' ? 'selected' : '' ?>>Price: Low to High</option>
         <option value="?slug=<?= urlencode($selectedCategorySlug) ?>&q=<?= urlencode($searchQuery) ?>&sort=price_desc" <?= $sortBy === 'price_desc' ? 'selected' : '' ?>>Price: High to Low</option>
@@ -124,71 +122,48 @@ require_once __DIR__ . '/includes/header.php';
 
   <!-- Product Grid -->
   <?php if (empty($products)): ?>
-    <div class="bg-white rounded-3xl p-8 border border-gray-150 text-center my-6 space-y-3">
-      <div class="w-12 h-12 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center mx-auto text-xl">
-        <?= renderIcon('search', 'w-6 h-6 text-emerald-700') ?>
-      </div>
+    <div class="bg-white rounded-3xl p-8 border border-gray-100 text-center my-6 space-y-3">
+      <div class="text-4xl">🔍</div>
       <h3 class="text-base font-bold text-gray-900">No items match your search</h3>
       <p class="text-xs text-gray-500 max-w-xs mx-auto">Try checking for different keywords like mango, coconut, or strawberry.</p>
       <div class="pt-2">
-        <a href="/category.php" class="inline-block bg-emerald-800 text-white font-bold text-xs px-4 py-2 rounded-xl">Clear Filters</a>
+        <a href="/category.php" class="inline-block bg-green-700 text-white font-bold text-xs px-4 py-2 rounded-xl">Clear Filters</a>
       </div>
     </div>
   <?php else: ?>
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
       <?php foreach ($products as $prod): 
         $displayPrice = !empty($prod['default_unit_price']) ? (float)$prod['default_unit_price'] : (float)$prod['base_price'];
-        $originalPrice = !empty($prod['default_original_price']) ? (float)$prod['default_original_price'] : null;
         $displayUnit = !empty($prod['default_unit_name']) ? $prod['default_unit_name'] : $prod['default_unit'];
         $unitId = !empty($prod['default_unit_id']) ? (int)$prod['default_unit_id'] : null;
       ?>
-        <div class="product-card">
+        <div class="bg-white rounded-2xl p-3 border border-gray-100 shadow-sm product-card flex flex-col justify-between relative">
           
-          <!-- Bounded Image Wrap + Badge + Favorite Icon -->
-          <div class="product-card-img-wrap">
-            <?php if (!empty($prod['badge_text'])): ?>
-              <span class="product-card-badge"><?= e($prod['badge_text']) ?></span>
-            <?php endif; ?>
+          <?php if (!empty($prod['badge_text'])): ?>
+            <span class="absolute top-2.5 left-2.5 z-10 bg-green-100 text-green-800 text-[9px] font-bold px-1.5 py-0.5 rounded-md">
+              <?= e($prod['badge_text']) ?>
+            </span>
+          <?php endif; ?>
 
-            <button type="button" 
-                    onclick="toggleFavorite(<?= $prod['id'] ?>, this)" 
-                    class="product-card-fav btn-favorite"
-                    title="Save to favorites">
-              <?= renderIcon('heart', 'w-3.5 h-3.5') ?>
-            </button>
+          <a href="/product.php?id=<?= $prod['id'] ?>" class="block relative aspect-square w-full rounded-xl overflow-hidden bg-gray-50 mb-2">
+            <img src="<?= e($prod['main_image']) ?>" alt="<?= e($prod['name']) ?>" loading="lazy" class="w-full h-full object-cover rounded-xl">
+          </a>
 
-            <a href="/product.php?id=<?= $prod['id'] ?>" class="w-full h-full flex items-center justify-center p-1">
-              <img src="<?= e($prod['main_image']) ?>" alt="<?= e($prod['name']) ?>" loading="lazy">
-            </a>
-          </div>
-
-          <!-- Product Details -->
-          <div class="product-card-info">
-            <div class="text-[9px] text-gray-400 font-bold uppercase tracking-wider truncate"><?= e($prod['category_name']) ?></div>
-            <a href="/product.php?id=<?= $prod['id'] ?>" class="product-card-title" title="<?= e($prod['name']) ?>">
+          <div class="space-y-1 mb-2">
+            <div class="text-[10px] text-gray-400 font-bold uppercase truncate"><?= e($prod['category_name']) ?></div>
+            <a href="/product.php?id=<?= $prod['id'] ?>" class="block font-bold text-xs sm:text-sm text-gray-900 leading-snug line-clamp-1 hover:text-green-700">
               <?= e($prod['name']) ?>
             </a>
-            <div class="product-card-unit"><?= e($displayUnit) ?></div>
-
-            <div class="product-card-pricing">
-              <span class="product-card-price">
-                <?= formatPrice($displayPrice) ?>
-              </span>
-              <?php if ($originalPrice && $originalPrice > $displayPrice): ?>
-                <span class="product-card-orig-price">
-                  <?= formatPrice($originalPrice) ?>
-                </span>
-              <?php endif; ?>
-            </div>
+            <div class="text-[11px] text-gray-500 font-medium"><?= e($displayUnit) ?></div>
           </div>
 
-          <div class="product-card-actions">
+          <div class="flex items-center justify-between pt-1 border-t border-gray-50">
+            <span class="text-xs sm:text-sm font-black text-gray-900"><?= formatPrice($displayPrice) ?></span>
             <button type="button" 
                     onclick="addToCart(<?= $prod['id'] ?>, <?= $unitId ? $unitId : 'null' ?>, 1, this)"
-                    class="product-card-add-btn w-full" 
+                    class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-green-700 hover:bg-green-800 text-white flex items-center justify-center transition shadow-sm active:scale-90" 
                     title="Add to Cart">
-              <?= renderIcon('shopping-cart', 'w-3 h-3 text-white') ?>
-              <span>Add</span>
+              <i class="fas fa-plus text-xs"></i>
             </button>
           </div>
 
@@ -198,16 +173,5 @@ require_once __DIR__ . '/includes/header.php';
   <?php endif; ?>
 
 </div>
-
-<script>
-function toggleFavorite(productId, btn) {
-  btn.classList.toggle('active');
-  const isActive = btn.classList.contains('active');
-  btn.innerHTML = isActive 
-    ? '<?= renderIcon("heart-fill", "w-3.5 h-3.5 text-red-500 fill-current") ?>' 
-    : '<?= renderIcon("heart", "w-3.5 h-3.5 text-gray-400") ?>';
-  showToast(isActive ? 'Saved to favorites!' : 'Removed from favorites', 'success');
-}
-</script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>

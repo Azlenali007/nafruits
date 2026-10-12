@@ -40,8 +40,8 @@ require_once __DIR__ . '/includes/header.php';
     <span class="absolute bottom-0 -right-6 text-xl">🍃</span>
     <span class="absolute bottom-0 -left-6 text-xl">🥭</span>
 
-    <div class="w-20 h-20 rounded-full bg-emerald-700 text-white flex items-center justify-center shadow-xl animate-pop-check">
-      <?= renderIcon('check', 'w-10 h-10 text-white stroke-[3]') ?>
+    <div class="w-24 h-24 rounded-full bg-green-700 text-white flex items-center justify-center shadow-2xl animate-pop-check">
+      <i class="fas fa-check text-4xl"></i>
     </div>
   </div>
 
@@ -52,28 +52,28 @@ require_once __DIR__ . '/includes/header.php';
   </div>
 
   <!-- Order Info Card (Matches Screenshot 8) -->
-  <div class="w-full bg-white rounded-3xl p-5 border border-gray-150 shadow-xs text-left space-y-3">
+  <div class="w-full bg-white rounded-3xl p-5 border border-gray-100 shadow-sm text-left space-y-3">
     <div class="flex items-center justify-between pb-3 border-b border-gray-100">
       <div>
         <span class="text-[10px] text-gray-400 font-bold uppercase block">Order ID</span>
-        <span class="text-sm font-black text-emerald-950">#<?= e($order['order_number']) ?></span>
+        <span class="text-sm font-black text-green-900">#<?= e($order['order_number']) ?></span>
       </div>
       <div class="text-right">
         <span class="text-[10px] text-gray-400 font-bold uppercase block">Total Amount</span>
-        <span class="text-sm font-black text-emerald-950"><?= formatPrice($order['total_amount']) ?></span>
+        <span class="text-sm font-black text-gray-900"><?= formatPrice($order['total_amount']) ?></span>
       </div>
     </div>
 
     <div class="space-y-1 text-xs">
-      <div class="flex items-center justify-between text-gray-500">
+      <div class="flex items-center justify-between text-gray-600">
         <span>Payment Method</span>
         <span class="font-bold uppercase text-gray-800"><?= e($order['payment_method']) ?></span>
       </div>
-      <div class="flex items-center justify-between text-gray-500">
+      <div class="flex items-center justify-between text-gray-600">
         <span>Payment Status</span>
-        <span class="font-bold text-emerald-700 uppercase"><?= e($order['payment_status']) ?></span>
+        <span class="font-bold text-green-700 uppercase"><?= e($order['payment_status']) ?></span>
       </div>
-      <div class="flex items-center justify-between text-gray-500">
+      <div class="flex items-center justify-between text-gray-600">
         <span>Delivery Slot</span>
         <span class="font-bold text-gray-800"><?= e($order['delivery_slot']) ?></span>
       </div>
@@ -87,7 +87,7 @@ require_once __DIR__ . '/includes/header.php';
 
   <!-- Action Buttons (Matches Screenshot 8) -->
   <div class="w-full space-y-2.5 pt-2">
-    <a href="/orders.php?order=<?= urlencode($order['order_number']) ?>" class="block w-full bg-emerald-800 hover:bg-emerald-900 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-md transition transform active:scale-95 text-sm sm:text-base">
+    <a href="/orders.php?order=<?= urlencode($order['order_number']) ?>" class="block w-full bg-green-700 hover:bg-green-800 text-white font-extrabold py-3.5 px-6 rounded-2xl shadow-md transition transform active:scale-95 text-sm sm:text-base">
       Track Your Order
     </a>
     <a href="/index.php" class="block w-full bg-white hover:bg-gray-50 border border-gray-200 text-gray-700 font-bold py-3.5 px-6 rounded-2xl transition text-sm">
