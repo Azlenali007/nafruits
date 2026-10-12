@@ -76,58 +76,56 @@ $initialUnitName = $defaultUnit ? $defaultUnit['unit_name'] : $product['default_
     </div>
   </div>
 
-  <!-- Big Hero Product Image Card -->
-  <div class="bg-white rounded-3xl p-4 border border-gray-150 shadow-xs relative overflow-hidden flex flex-col items-center">
-    <div class="w-full aspect-square max-h-72 sm:max-h-96 rounded-2xl overflow-hidden bg-emerald-50/20 flex items-center justify-center">
+  <!-- Product Details Card (Bounded Gallery & Compact Info in Single Clean Hierarchy) -->
+  <div class="product-detail-card space-y-3 sm:space-y-4">
+    
+    <!-- Bounded Product Image Box (Prevents Oversized / Full-Viewport Image) -->
+    <div class="product-detail-img-box">
       <img id="main-product-img" 
            src="<?= e($product['main_image']) ?>" 
-           alt="<?= e($product['name']) ?>" 
-           class="w-full h-full object-cover rounded-2xl">
+           alt="<?= e($product['name']) ?>">
     </div>
 
     <!-- Thumbnail Gallery -->
     <?php if (!empty($galleryImages)): ?>
-      <div class="flex items-center space-x-2.5 mt-3 overflow-x-auto no-scrollbar w-full justify-center">
-        <button onclick="document.getElementById('main-product-img').src='<?= e($product['main_image']) ?>'" class="w-14 h-14 rounded-xl border-2 border-emerald-600 overflow-hidden focus:outline-none p-0.5">
-          <img src="<?= e($product['main_image']) ?>" class="w-full h-full object-cover rounded-lg">
+      <div class="flex items-center space-x-2 overflow-x-auto no-scrollbar w-full justify-center pb-1">
+        <button onclick="document.getElementById('main-product-img').src='<?= e($product['main_image']) ?>'" class="w-12 h-12 rounded-xl border-2 border-emerald-600 overflow-hidden focus:outline-none p-0.5 flex-shrink-0 bg-white">
+          <img src="<?= e($product['main_image']) ?>" class="w-full h-full object-contain rounded-lg">
         </button>
         <?php foreach ($galleryImages as $img): ?>
-          <button onclick="document.getElementById('main-product-img').src='<?= e($img['image_url']) ?>'" class="w-14 h-14 rounded-xl border border-gray-200 overflow-hidden hover:border-emerald-500 focus:border-emerald-600 focus:outline-none p-0.5">
-            <img src="<?= e($img['image_url']) ?>" class="w-full h-full object-cover rounded-lg">
+          <button onclick="document.getElementById('main-product-img').src='<?= e($img['image_url']) ?>'" class="w-12 h-12 rounded-xl border border-gray-200 overflow-hidden hover:border-emerald-500 focus:border-emerald-600 focus:outline-none p-0.5 flex-shrink-0 bg-white">
+            <img src="<?= e($img['image_url']) ?>" class="w-full h-full object-contain rounded-lg">
           </button>
         <?php endforeach; ?>
       </div>
     <?php endif; ?>
-  </div>
 
-  <!-- Product Title, Rating & Price Row (Matching Screenshot 3) -->
-  <div class="bg-white rounded-3xl p-5 border border-gray-150 shadow-xs space-y-4">
-    
-    <div>
-      <div class="flex items-center space-x-2 text-[11px] font-bold text-gray-400 mb-1">
-        <span class="text-emerald-800 uppercase tracking-wider font-extrabold"><?= e($product['category_name']) ?></span>
-        <span>•</span>
+    <!-- Product Title, Rating, & SKU Immediately Below Image -->
+    <div class="pt-1 border-t border-gray-100">
+      <div class="flex items-center justify-between text-[11px] font-bold text-gray-400 mb-1">
+        <span class="text-emerald-800 uppercase tracking-wider font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md"><?= e($product['category_name']) ?></span>
         <span>SKU: <?= e($product['sku']) ?></span>
       </div>
 
-      <h1 class="text-2xl font-black text-gray-900 tracking-tight leading-tight">
+      <h1 class="text-xl sm:text-2xl font-black text-gray-900 tracking-tight leading-tight">
         <?= e($product['name']) ?>
       </h1>
 
       <!-- Rating info: 4.8 (2.4k reviews) -->
-      <div class="flex items-center space-x-1.5 mt-1.5 text-xs text-gray-500">
+      <div class="flex items-center space-x-1.5 mt-1 text-xs text-gray-500">
         <div class="flex items-center text-amber-500">
           <?= renderIcon('star', 'w-3.5 h-3.5 text-amber-400') ?>
         </div>
         <span class="font-extrabold text-gray-800"><?= number_format((float)$product['rating'], 1) ?></span>
         <span>(<?= number_format((int)$product['review_count']) ?> reviews)</span>
+        <span class="text-emerald-700 font-bold ml-2">● In Stock</span>
       </div>
     </div>
 
-    <!-- Price & Badges -->
+    <!-- Price & Badges Row -->
     <div class="flex items-center space-x-3 pt-1">
       <div class="flex items-baseline space-x-1">
-        <span id="displayed-price" class="text-3xl font-black text-emerald-950">
+        <span id="displayed-price" class="text-2xl sm:text-3xl font-black text-emerald-950">
           <?= formatPrice($initialPrice) ?>
         </span>
         <span id="displayed-unit" class="text-xs font-semibold text-gray-500">
@@ -142,19 +140,19 @@ $initialUnitName = $defaultUnit ? $defaultUnit['unit_name'] : $product['default_
     </div>
 
     <!-- Description -->
-    <div class="text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-b border-gray-100 py-3">
+    <div class="text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-b border-gray-100 py-2.5">
       <?= nl2br(e($product['description'] ?: $product['short_description'])) ?>
     </div>
 
-    <!-- Unit / Pack Size Selection (Prices associated with selected unit) -->
+    <!-- Unit / Pack Size Selection -->
     <?php if (!empty($productUnits)): ?>
-      <div class="space-y-2">
+      <div class="space-y-1.5">
         <label class="block text-xs font-black text-gray-800 uppercase tracking-wider">Select Pack / Unit:</label>
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
           <?php foreach ($productUnits as $idx => $u): ?>
             <button type="button" 
                     onclick="selectUnit(<?= $u['id'] ?>, <?= $u['price'] ?>, '<?= e($u['unit_name']) ?>', this)"
-                    class="unit-option-btn text-left p-2.5 rounded-2xl border text-xs font-medium transition <?= $idx === 0 ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-black' : 'border-gray-200 text-gray-700 hover:border-gray-300' ?>">
+                    class="unit-option-btn text-left p-2 rounded-xl border text-xs font-medium transition <?= $idx === 0 ? 'border-emerald-600 bg-emerald-50/70 text-emerald-950 font-black shadow-xs' : 'border-gray-200 text-gray-700 hover:border-gray-300' ?>">
               <div class="font-bold"><?= e($u['unit_name']) ?></div>
               <div class="text-emerald-800 font-black text-xs mt-0.5"><?= formatPrice($u['price']) ?></div>
             </button>
@@ -163,25 +161,24 @@ $initialUnitName = $defaultUnit ? $defaultUnit['unit_name'] : $product['default_
       </div>
     <?php endif; ?>
 
-    <!-- Quantity & Add to Cart Controls (Matching Screenshot 3) -->
+    <!-- Quantity & Add to Cart Controls -->
     <div class="pt-2 flex items-center space-x-3">
       <!-- Quantity Counter -->
-      <div class="flex items-center bg-gray-100 rounded-2xl p-1 border border-gray-200">
-        <button type="button" class="btn-qty-minus w-9 h-9 rounded-xl bg-white text-gray-700 font-bold shadow-xs hover:bg-gray-50 flex items-center justify-center transition">
-          <?= renderIcon('minus', 'w-3.5 h-3.5 text-gray-700 stroke-[2.5]') ?>
+      <div class="flex items-center bg-gray-100 rounded-xl p-1 border border-gray-200">
+        <button type="button" class="btn-qty-minus w-8 h-8 rounded-lg bg-white text-gray-700 font-bold shadow-xs hover:bg-gray-50 flex items-center justify-center transition">
+          <?= renderIcon('minus', 'w-3 h-3 text-gray-700 stroke-[2.5]') ?>
         </button>
-        <input type="number" id="product-qty" value="1" min="1" max="50" class="qty-input w-12 text-center bg-transparent font-black text-sm text-gray-800 focus:outline-none" readonly>
-        <button type="button" class="btn-qty-plus w-9 h-9 rounded-xl bg-white text-gray-700 font-bold shadow-xs hover:bg-gray-50 flex items-center justify-center transition">
-          <?= renderIcon('plus', 'w-3.5 h-3.5 text-gray-700 stroke-[2.5]') ?>
+        <input type="number" id="product-qty" value="1" min="1" max="50" class="qty-input w-10 text-center bg-transparent font-black text-sm text-gray-800 focus:outline-none" readonly>
+        <button type="button" class="btn-qty-plus w-8 h-8 rounded-lg bg-white text-gray-700 font-bold shadow-xs hover:bg-gray-50 flex items-center justify-center transition">
+          <?= renderIcon('plus', 'w-3 h-3 text-gray-700 stroke-[2.5]') ?>
         </button>
       </div>
 
       <!-- Add to Cart Full Button -->
       <button type="button" 
-              id="main-add-cart-btn"
               onclick="submitProductAddToCart(this)"
-              class="flex-1 bg-emerald-800 hover:bg-emerald-900 text-white font-black py-3.5 px-6 rounded-2xl shadow-md transition transform active:scale-95 flex items-center justify-center space-x-2 text-sm sm:text-base">
-        <?= renderIcon('shopping-cart', 'w-4 h-4 text-white') ?>
+              class="flex-1 bg-emerald-800 hover:bg-emerald-900 active:scale-95 text-white font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl transition shadow-md flex items-center justify-center space-x-2">
+        <?= renderIcon('shopping-bag', 'w-4 h-4 text-white') ?>
         <span>Add to Cart</span>
       </button>
     </div>
@@ -210,8 +207,10 @@ $initialUnitName = $defaultUnit ? $defaultUnit['unit_name'] : $product['default_
       <h3 class="text-sm sm:text-base font-black text-gray-900 mb-3 tracking-tight">You May Also Like</h3>
       <div class="flex space-x-3 overflow-x-auto no-scrollbar pb-2">
         <?php foreach ($relatedProducts as $rel): ?>
-          <a href="/product.php?id=<?= $rel['id'] ?>" class="w-32 flex-shrink-0 bg-white p-2.5 rounded-2xl border border-gray-150 shadow-xs block text-center hover:border-emerald-500 transition product-card">
-            <img src="<?= e($rel['main_image']) ?>" class="w-full aspect-square object-cover rounded-xl mb-1.5">
+          <a href="/product.php?id=<?= $rel['id'] ?>" class="w-32 flex-shrink-0 bg-white p-2.5 rounded-2xl border border-gray-200 shadow-xs block text-center hover:border-emerald-500 transition">
+            <div class="w-full h-24 overflow-hidden rounded-xl bg-gray-50 flex items-center justify-center mb-1.5">
+              <img src="<?= e($rel['main_image']) ?>" class="max-w-full max-h-24 object-contain">
+            </div>
             <div class="text-xs font-bold text-gray-800 truncate"><?= e($rel['name']) ?></div>
             <div class="text-xs font-black text-emerald-950 mt-0.5"><?= formatPrice($rel['base_price']) ?></div>
           </a>

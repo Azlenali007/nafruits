@@ -50,35 +50,35 @@ try {
 
 <div class="max-w-md mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl px-4 pt-3 space-y-6">
 
-  <!-- 1. Promotional Hero Banner: Fresh Coconut Water (High Contrast Dark Forest-Green on Light Green) -->
-  <div class="relative overflow-hidden rounded-3xl bg-gradient-to-r from-emerald-100 via-green-100/90 to-emerald-50 border border-emerald-300/80 shadow-xs p-4 sm:p-6 flex items-center justify-between">
+  <!-- 1. Promotional Hero Banner: Fresh Coconut Water (Restored Premium Green Styling) -->
+  <div class="hero-banner p-4 sm:p-6 flex items-center justify-between">
     
     <!-- Text Content (Dark Forest-Green with Maximum Contrast) -->
     <div class="z-10 max-w-[62%] sm:max-w-[65%] space-y-1.5 sm:space-y-2">
       <!-- Badge -->
-      <span class="inline-flex items-center space-x-1.5 bg-[#064e3b] text-[#bbf7d0] text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider shadow-xs">
+      <span class="hero-badge">
         <?= renderIcon('leaf', 'w-3 h-3 text-lime-300 stroke-[2.5]') ?>
         <span>Nature's Energy Drink</span>
       </span>
 
       <!-- Heading -->
-      <h2 class="text-xl sm:text-3xl font-black text-[#064e3b] leading-tight tracking-tight mt-1">
-        Fresh<br><span class="text-[#047857]">Coconut Water</span>
+      <h2 class="hero-title tracking-tight mt-0.5">
+        Fresh<br><span class="hero-title-accent">Coconut Water</span>
       </h2>
 
       <!-- Description (Clear, High-Contrast Dark Green, Visible on Mobile & Desktop) -->
-      <p class="text-[11px] sm:text-xs text-[#064e3b] font-semibold leading-relaxed line-clamp-2 max-w-xs">
+      <p class="hero-desc line-clamp-2 max-w-xs">
         Chilled pure raw electrolyte water cut fresh from coastal palms daily.
       </p>
 
       <!-- Price & CTA Action -->
       <div class="pt-1 flex items-center space-x-2">
-        <span class="inline-flex items-center px-3 py-1 rounded-full bg-white text-[#064e3b] font-black text-xs sm:text-sm shadow-xs border border-emerald-300">
+        <span class="hero-price-pill">
           ₹ 40
         </span>
 
         <button onclick="addToCart(1, 1, 1, this)" 
-                class="bg-[#064e3b] hover:bg-[#022c22] active:scale-95 text-white font-extrabold text-xs px-3.5 py-1.5 sm:py-2 rounded-xl transition shadow-sm flex items-center space-x-1.5 cursor-pointer"
+                class="hero-cta-btn"
                 title="Add Fresh Coconut Water to Cart">
           <?= renderIcon('plus', 'w-3.5 h-3.5 text-white stroke-[2.5]') ?>
           <span>Add</span>
@@ -87,17 +87,16 @@ try {
     </div>
 
     <!-- Product Image (Right Side, Beautifully Proportioned Tender Coconut) -->
-    <div class="relative w-28 h-28 sm:w-40 sm:h-40 flex-shrink-0 -mr-1 flex items-center justify-center">
+    <div class="hero-img-wrap -mr-1">
       <img src="https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=600&q=80" 
-           alt="Fresh Coconut Water" 
-           class="w-full h-full object-cover rounded-2xl drop-shadow-md border-2 border-white transform hover:scale-105 transition duration-300">
+           alt="Fresh Coconut Water">
     </div>
 
     <!-- Pagination dots indicator with dark green active dot -->
     <div class="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center space-x-1.5 pointer-events-none">
       <span class="w-4 h-1.5 rounded-full bg-[#064e3b]"></span>
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
-      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+      <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
     </div>
   </div>
 
@@ -105,14 +104,14 @@ try {
   <div>
     <div class="flex items-center justify-between mb-2.5">
       <h3 class="text-sm sm:text-base font-black text-gray-900 tracking-tight">Shop by Category</h3>
-      <a href="/category.php" class="text-xs font-extrabold text-emerald-700 hover:text-emerald-800 flex items-center space-x-1">
+      <a href="/category.php" class="text-xs font-black text-emerald-800 hover:text-emerald-950 flex items-center space-x-1 whitespace-nowrap bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-full transition">
         <span>View All</span>
-        <?= renderIcon('chevron-right', 'w-3.5 h-3.5 text-emerald-700') ?>
+        <?= renderIcon('chevron-right', 'w-3.5 h-3.5 text-emerald-800') ?>
       </a>
     </div>
 
     <div class="flex space-x-2.5 overflow-x-auto no-scrollbar py-1">
-      <a href="/category.php?slug=fresh-fruits" class="flex items-center space-x-2 bg-white border border-gray-150 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
+      <a href="/category.php?slug=fresh-fruits" class="flex items-center space-x-2 bg-white border border-gray-200 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
         <span class="w-7 h-7 rounded-xl bg-amber-50 flex items-center justify-center text-base">🍎</span>
         <span class="text-xs font-bold text-gray-800">Fresh Fruits</span>
       </a>
@@ -120,11 +119,11 @@ try {
         <span class="w-7 h-7 rounded-xl bg-emerald-100 flex items-center justify-center text-base">🥥</span>
         <span class="text-xs font-black text-emerald-900">Coconut & Water</span>
       </a>
-      <a href="/category.php?slug=seasonal-fruits" class="flex items-center space-x-2 bg-white border border-gray-150 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
+      <a href="/category.php?slug=seasonal-fruits" class="flex items-center space-x-2 bg-white border border-gray-200 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
         <span class="w-7 h-7 rounded-xl bg-amber-50 flex items-center justify-center text-base">🥭</span>
         <span class="text-xs font-bold text-gray-800">Seasonal</span>
       </a>
-      <a href="/category.php?slug=exotic-berries" class="flex items-center space-x-2 bg-white border border-gray-150 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
+      <a href="/category.php?slug=exotic-berries" class="flex items-center space-x-2 bg-white border border-gray-200 rounded-2xl px-3.5 py-2 shadow-xs flex-shrink-0 hover:border-emerald-500 hover:bg-emerald-50/30 transition">
         <span class="w-7 h-7 rounded-xl bg-red-50 flex items-center justify-center text-base">🍓</span>
         <span class="text-xs font-bold text-gray-800">Berries & Exotic</span>
       </a>
@@ -136,86 +135,93 @@ try {
     <?php foreach ($sections as $section): ?>
       <?php if (!empty($section['products'])): ?>
         <section class="space-y-2.5">
-          <div class="flex items-center justify-between">
-            <div>
-              <h3 class="text-base sm:text-lg font-black text-gray-900 tracking-tight"><?= e($section['title']) ?></h3>
+          <div class="flex items-center justify-between mb-1">
+            <div class="min-w-0 pr-2">
+              <h3 class="text-base sm:text-lg font-black text-gray-900 tracking-tight leading-tight"><?= e($section['title']) ?></h3>
               <?php if (!empty($section['subtitle'])): ?>
-                <p class="text-[11px] text-gray-500"><?= e($section['subtitle']) ?></p>
+                <p class="text-[11px] text-gray-500 font-medium truncate"><?= e($section['subtitle']) ?></p>
               <?php endif; ?>
             </div>
-            <a href="/category.php?section=<?= e($section['slug']) ?>" class="text-xs font-extrabold text-emerald-700 hover:text-emerald-800 flex items-center space-x-1">
-              <span>See All</span>
-              <?= renderIcon('chevron-right', 'w-3 h-3 text-emerald-700') ?>
+            <a href="/category.php?section=<?= e($section['slug']) ?>" class="flex-shrink-0 text-xs font-black text-emerald-800 hover:text-emerald-950 flex items-center space-x-1 whitespace-nowrap bg-emerald-50 hover:bg-emerald-100 px-2.5 py-1 rounded-full transition">
+              <span>View All</span>
+              <?= renderIcon('chevron-right', 'w-3 h-3 text-emerald-800 stroke-[2.5]') ?>
             </a>
           </div>
 
-          <!-- Horizontally Scrollable Cards Container (Showing ~2.3 cards on mobile with snap preview) -->
-          <div id="carousel-<?= $section['id'] ?>" class="flex space-x-3 overflow-x-auto no-scrollbar carousel-snap pb-2 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0">
+          <!-- Horizontally Scrollable Cards Container (Showing ~2.2 cards on mobile with snap preview) -->
+          <div id="carousel-<?= $section['id'] ?>" class="carousel-snap-track">
             <?php foreach ($section['products'] as $prod): 
               $displayPrice = !empty($prod['default_unit_price']) ? (float)$prod['default_unit_price'] : (float)$prod['base_price'];
               $originalPrice = !empty($prod['default_original_price']) ? (float)$prod['default_original_price'] : null;
               $displayUnit = !empty($prod['default_unit_name']) ? $prod['default_unit_name'] : $prod['default_unit'];
               $unitId = !empty($prod['default_unit_id']) ? (int)$prod['default_unit_id'] : null;
+              $discountPercent = ($originalPrice && $originalPrice > $displayPrice) ? round((($originalPrice - $displayPrice) / $originalPrice) * 100) : 0;
             ?>
-              <!-- Premium Product Card (Consistent 145px width on mobile, 175px on sm, 190px on md) -->
-              <div class="w-[145px] sm:w-[170px] md:w-[190px] flex-shrink-0 bg-white rounded-2xl p-2.5 border border-gray-150 shadow-xs product-card flex flex-col justify-between relative group">
+              <!-- Compact & Proportional Product Card (Contains All 10 Required Elements) -->
+              <div class="product-card">
                 
-                <!-- Top Card Actions: Badge & Favorite Icon -->
-                <div class="flex items-center justify-between absolute top-2 inset-x-2 z-10 pointer-events-none">
+                <!-- 1. Bounded Image Wrap + 2. Badge + 3. Favorite Button -->
+                <div class="product-card-img-wrap">
                   <?php if (!empty($prod['badge_text'])): ?>
-                    <span class="bg-emerald-100/90 backdrop-blur-xs text-emerald-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shadow-xs pointer-events-auto">
-                      <?= e($prod['badge_text']) ?>
-                    </span>
-                  <?php else: ?>
-                    <span></span>
+                    <span class="product-card-badge"><?= e($prod['badge_text']) ?></span>
+                  <?php elseif ($discountPercent > 0): ?>
+                    <span class="product-card-badge product-card-badge-discount"><?= $discountPercent ?>% OFF</span>
                   <?php endif; ?>
 
-                  <!-- Favorite Button -->
                   <button type="button" 
                           onclick="toggleFavorite(<?= $prod['id'] ?>, this)" 
-                          class="w-6 h-6 rounded-full bg-white/80 backdrop-blur-xs hover:bg-white text-gray-400 hover:text-red-500 shadow-xs flex items-center justify-center transition pointer-events-auto btn-favorite"
+                          class="product-card-fav btn-favorite"
                           title="Save to favorites">
                     <?= renderIcon('heart', 'w-3.5 h-3.5') ?>
                   </button>
+
+                  <a href="/product.php?id=<?= $prod['id'] ?>" class="w-full h-full flex items-center justify-center p-1">
+                    <img src="<?= e($prod['main_image']) ?>" 
+                         alt="<?= e($prod['name']) ?>" 
+                         loading="lazy">
+                  </a>
                 </div>
 
-                <!-- Product Image Container -->
-                <a href="/product.php?id=<?= $prod['id'] ?>" class="block relative aspect-square w-full rounded-xl overflow-hidden bg-emerald-50/30 mb-2">
-                  <img src="<?= e($prod['main_image']) ?>" 
-                       alt="<?= e($prod['name']) ?>" 
-                       loading="lazy" 
-                       class="w-full h-full object-cover rounded-xl transform group-hover:scale-105 transition duration-300">
-                </a>
-
-                <!-- Product Title & Pack Unit -->
-                <div class="space-y-0.5 mb-2">
-                  <a href="/product.php?id=<?= $prod['id'] ?>" class="block font-black text-xs sm:text-sm text-gray-900 leading-snug line-clamp-1 hover:text-emerald-700">
+                <!-- 4. Product Name + 8. Unit Selector + 5. Current Price + 6. Original Price + 7. Discount Tag -->
+                <div class="product-card-info">
+                  <a href="/product.php?id=<?= $prod['id'] ?>" class="product-card-title" title="<?= e($prod['name']) ?>">
                     <?= e($prod['name']) ?>
                   </a>
-                  <div class="flex items-center text-[11px] text-gray-500 font-medium">
+
+                  <div class="product-card-unit">
                     <span><?= e($displayUnit) ?></span>
                   </div>
-                </div>
 
-                <!-- Price and Quick Add Button Row -->
-                <div class="flex items-center justify-between pt-1 border-t border-gray-50">
-                  <div class="flex flex-col">
+                  <div class="product-card-pricing">
+                    <span class="product-card-price">
+                      <?= formatPrice($displayPrice) ?>
+                    </span>
                     <?php if ($originalPrice && $originalPrice > $displayPrice): ?>
-                      <span class="text-[10px] text-gray-400 line-through">
+                      <span class="product-card-orig-price">
                         <?= formatPrice($originalPrice) ?>
                       </span>
                     <?php endif; ?>
-                    <span class="text-xs sm:text-sm font-black text-emerald-950">
-                      <?= formatPrice($displayPrice) ?>
-                    </span>
+                  </div>
+                </div>
+
+                <!-- 9. Compact Quantity Selector + 10. Visible Add to Cart Button -->
+                <div class="product-card-actions">
+                  <div class="card-qty-control">
+                    <button type="button" onclick="adjustCardQty(<?= $prod['id'] ?>, -1)" class="card-qty-btn" aria-label="Decrease quantity">
+                      <?= renderIcon('minus', 'w-2.5 h-2.5 stroke-[2.5]') ?>
+                    </button>
+                    <span id="card-qty-<?= $prod['id'] ?>" class="card-qty-num">1</span>
+                    <button type="button" onclick="adjustCardQty(<?= $prod['id'] ?>, 1)" class="card-qty-btn" aria-label="Increase quantity">
+                      <?= renderIcon('plus', 'w-2.5 h-2.5 stroke-[2.5]') ?>
+                    </button>
                   </div>
 
-                  <!-- Round Green Add to Cart Button (Matching Reference Screenshot) -->
                   <button type="button" 
-                          onclick="addToCart(<?= $prod['id'] ?>, <?= $unitId ? $unitId : 'null' ?>, 1, this)"
-                          class="w-8 h-8 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:scale-90 text-white flex items-center justify-center transition shadow-sm"
+                          onclick="addCardItemToCart(<?= $prod['id'] ?>, <?= $unitId ? $unitId : 'null' ?>, this)"
+                          class="product-card-add-btn" 
                           title="Add to Cart">
-                    <?= renderIcon('shopping-cart', 'w-4 h-4 text-white') ?>
+                    <?= renderIcon('shopping-cart', 'w-3 h-3 text-white') ?>
+                    <span>Add</span>
                   </button>
                 </div>
 
@@ -257,6 +263,20 @@ function toggleFavorite(productId, btn) {
     ? '<?= renderIcon("heart-fill", "w-3.5 h-3.5 text-red-500 fill-current") ?>' 
     : '<?= renderIcon("heart", "w-3.5 h-3.5 text-gray-400") ?>';
   showToast(isActive ? 'Saved to favorites!' : 'Removed from favorites', 'success');
+}
+
+function adjustCardQty(productId, delta) {
+  const el = document.getElementById('card-qty-' + productId);
+  if (!el) return;
+  let current = parseInt(el.textContent, 10) || 1;
+  current = Math.max(1, current + delta);
+  el.textContent = current;
+}
+
+function addCardItemToCart(productId, unitId, btn) {
+  const qtyEl = document.getElementById('card-qty-' + productId);
+  const qty = qtyEl ? (parseInt(qtyEl.textContent, 10) || 1) : 1;
+  addToCart(productId, unitId, qty, btn);
 }
 </script>
 

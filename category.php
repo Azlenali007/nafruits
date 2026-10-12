@@ -142,55 +142,53 @@ require_once __DIR__ . '/includes/header.php';
         $displayUnit = !empty($prod['default_unit_name']) ? $prod['default_unit_name'] : $prod['default_unit'];
         $unitId = !empty($prod['default_unit_id']) ? (int)$prod['default_unit_id'] : null;
       ?>
-        <div class="bg-white rounded-2xl p-2.5 border border-gray-150 shadow-xs product-card flex flex-col justify-between relative group">
+        <div class="product-card">
           
-          <!-- Top Card Actions: Badge & Favorite Icon -->
-          <div class="flex items-center justify-between absolute top-2 inset-x-2 z-10 pointer-events-none">
+          <!-- Bounded Image Wrap + Badge + Favorite Icon -->
+          <div class="product-card-img-wrap">
             <?php if (!empty($prod['badge_text'])): ?>
-              <span class="bg-emerald-100/90 backdrop-blur-xs text-emerald-800 text-[9px] font-extrabold px-1.5 py-0.5 rounded-md shadow-xs pointer-events-auto">
-                <?= e($prod['badge_text']) ?>
-              </span>
-            <?php else: ?>
-              <span></span>
+              <span class="product-card-badge"><?= e($prod['badge_text']) ?></span>
             <?php endif; ?>
 
             <button type="button" 
                     onclick="toggleFavorite(<?= $prod['id'] ?>, this)" 
-                    class="w-6 h-6 rounded-full bg-white/80 backdrop-blur-xs hover:bg-white text-gray-400 hover:text-red-500 shadow-xs flex items-center justify-center transition pointer-events-auto btn-favorite"
+                    class="product-card-fav btn-favorite"
                     title="Save to favorites">
               <?= renderIcon('heart', 'w-3.5 h-3.5') ?>
             </button>
+
+            <a href="/product.php?id=<?= $prod['id'] ?>" class="w-full h-full flex items-center justify-center p-1">
+              <img src="<?= e($prod['main_image']) ?>" alt="<?= e($prod['name']) ?>" loading="lazy">
+            </a>
           </div>
 
-          <a href="/product.php?id=<?= $prod['id'] ?>" class="block relative aspect-square w-full rounded-xl overflow-hidden bg-emerald-50/20 mb-2">
-            <img src="<?= e($prod['main_image']) ?>" alt="<?= e($prod['name']) ?>" loading="lazy" class="w-full h-full object-cover rounded-xl transform group-hover:scale-105 transition duration-300">
-          </a>
-
-          <div class="space-y-0.5 mb-2">
+          <!-- Product Details -->
+          <div class="product-card-info">
             <div class="text-[9px] text-gray-400 font-bold uppercase tracking-wider truncate"><?= e($prod['category_name']) ?></div>
-            <a href="/product.php?id=<?= $prod['id'] ?>" class="block font-black text-xs sm:text-sm text-gray-900 leading-snug line-clamp-1 hover:text-emerald-700">
+            <a href="/product.php?id=<?= $prod['id'] ?>" class="product-card-title" title="<?= e($prod['name']) ?>">
               <?= e($prod['name']) ?>
             </a>
-            <div class="text-[11px] text-gray-500 font-medium"><?= e($displayUnit) ?></div>
-          </div>
+            <div class="product-card-unit"><?= e($displayUnit) ?></div>
 
-          <div class="flex items-center justify-between pt-1 border-t border-gray-50">
-            <div class="flex flex-col">
+            <div class="product-card-pricing">
+              <span class="product-card-price">
+                <?= formatPrice($displayPrice) ?>
+              </span>
               <?php if ($originalPrice && $originalPrice > $displayPrice): ?>
-                <span class="text-[10px] text-gray-400 line-through">
+                <span class="product-card-orig-price">
                   <?= formatPrice($originalPrice) ?>
                 </span>
               <?php endif; ?>
-              <span class="text-xs sm:text-sm font-black text-emerald-950">
-                <?= formatPrice($displayPrice) ?>
-              </span>
             </div>
+          </div>
 
+          <div class="product-card-actions">
             <button type="button" 
                     onclick="addToCart(<?= $prod['id'] ?>, <?= $unitId ? $unitId : 'null' ?>, 1, this)"
-                    class="w-8 h-8 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white flex items-center justify-center transition shadow-sm active:scale-90" 
+                    class="product-card-add-btn w-full" 
                     title="Add to Cart">
-              <?= renderIcon('shopping-cart', 'w-4 h-4 text-white') ?>
+              <?= renderIcon('shopping-cart', 'w-3 h-3 text-white') ?>
+              <span>Add</span>
             </button>
           </div>
 

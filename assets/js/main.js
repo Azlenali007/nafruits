@@ -136,15 +136,18 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 6. Carousel Horizontal Scroll Buttons
-  document.querySelectorAll('.carousel-scroll-btn').forEach(btn => {
-    btn.addEventListener('click', function () {
-      const targetId = this.getAttribute('data-target');
-      const container = document.getElementById(targetId);
-      const direction = this.getAttribute('data-dir') === 'left' ? -260 : 260;
-      if (container) {
-        container.scrollBy({ left: direction, behavior: 'smooth' });
-      }
-    });
-  });
+  // 7. Homepage Card Quantity Helpers
+  window.adjustCardQty = function (productId, delta) {
+    const el = document.getElementById('card-qty-' + productId);
+    if (!el) return;
+    let current = parseInt(el.textContent, 10) || 1;
+    current = Math.max(1, current + delta);
+    el.textContent = current;
+  };
+
+  window.addCardItemToCart = function (productId, unitId, btn) {
+    const qtyEl = document.getElementById('card-qty-' + productId);
+    const qty = qtyEl ? (parseInt(qtyEl.textContent, 10) || 1) : 1;
+    addToCart(productId, unitId, qty, btn);
+  };
 });

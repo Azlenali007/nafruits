@@ -21,8 +21,31 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   <meta name="description" content="Na Fresh delivers premium orchard-fresh fruits and natural tender coconut water right to your doorstep in minutes.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥥</text></svg>">
   
-  <!-- Tailwind CSS via reliable CDN -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+  <!-- Modern Tailwind CSS with JIT & Arbitrary Value Support -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              950: '#064e3b',
+              900: '#14532d',
+              800: '#166534',
+              700: '#15803d',
+              600: '#16a34a',
+              500: '#22c55e',
+              400: '#4ade80',
+              300: '#86efac',
+              200: '#bbf7d0',
+              100: '#dcfce7',
+              50: '#f0fdf4'
+            }
+          }
+        }
+      }
+    };
+  </script>
   
   <!-- Font Awesome 6 Icons (as fallback) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
