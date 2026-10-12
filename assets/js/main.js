@@ -4,7 +4,12 @@
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-  // 1. Branded Intro Screen Logic
+  // 1. Initialize Lucide Icons if loaded
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+
+  // 2. Branded Intro Screen Logic
   const splash = document.getElementById('brand-splash');
   if (splash) {
     const hasSeenSplash = sessionStorage.getItem('na_splash_seen');
@@ -21,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // 2. Setup Toast Notifications
+  // 3. Setup Toast Notifications
   window.showToast = function (message, icon = 'success') {
     if (window.Swal) {
       const Toast = Swal.mixin({
@@ -44,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   };
 
-  // 3. Add to Cart AJAX Helper
+  // 4. Add to Cart AJAX Helper
   document.querySelectorAll('.btn-add-to-cart').forEach(button => {
     button.addEventListener('click', function (e) {
       e.preventDefault();
@@ -58,7 +63,6 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
   window.addToCart = function (productId, unitId, quantity, triggerBtn) {
-    const originalText = triggerBtn ? triggerBtn.innerHTML : null;
     if (triggerBtn) {
       triggerBtn.disabled = true;
       triggerBtn.classList.add('opacity-75');
@@ -107,7 +111,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // 4. Quantity Adjusters on Product & Cart Pages
+  // 5. Quantity Adjusters on Product & Cart Pages
   document.querySelectorAll('.btn-qty-minus').forEach(btn => {
     btn.addEventListener('click', function () {
       const input = this.parentElement.querySelector('input.qty-input');
@@ -132,7 +136,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // 5. Carousel Horizontal Scroll Buttons
+  // 6. Carousel Horizontal Scroll Buttons
   document.querySelectorAll('.carousel-scroll-btn').forEach(btn => {
     btn.addEventListener('click', function () {
       const targetId = this.getAttribute('data-target');

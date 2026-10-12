@@ -229,10 +229,10 @@ require_once __DIR__ . '/includes/header.php';
 
   <!-- Header -->
   <div class="flex items-center justify-between">
-    <a href="/cart.php" class="w-9 h-9 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition shadow-sm">
-      <i class="fas fa-arrow-left text-sm"></i>
+    <a href="/cart.php" class="w-9 h-9 rounded-full bg-white border border-gray-150 flex items-center justify-center text-gray-700 hover:bg-gray-100 transition shadow-xs">
+      <?= renderIcon('arrow-left', 'w-4 h-4 text-gray-700') ?>
     </a>
-    <h1 class="text-lg font-black text-gray-900 tracking-tight">Review & Checkout</h1>
+    <h1 class="text-base font-black text-gray-900 tracking-tight">Review & Checkout</h1>
     <div class="w-9"></div>
   </div>
 
@@ -246,29 +246,29 @@ require_once __DIR__ . '/includes/header.php';
     <?= csrfField() ?>
 
     <!-- 1. Delivery Address Card (Matches Screenshot 5) -->
-    <div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm space-y-3">
+    <div class="bg-white rounded-3xl p-4 border border-gray-150 shadow-xs space-y-3">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black text-gray-900 flex items-center space-x-2">
-          <i class="fas fa-map-marker-alt text-green-700"></i>
+          <?= renderIcon('map-pin', 'w-4 h-4 text-emerald-700') ?>
           <span>Delivery Address</span>
         </h2>
-        <button type="button" onclick="toggleCustomAddress()" class="text-xs font-bold text-green-700 hover:underline">
+        <button type="button" onclick="toggleCustomAddress()" class="text-xs font-bold text-emerald-700 hover:underline">
           + Add New
         </button>
       </div>
 
       <!-- Use Current Location banner (Matches Screenshot 5) -->
-      <div class="bg-green-50 border border-green-200 rounded-2xl p-3 flex items-center justify-between">
+      <div class="bg-emerald-50 border border-emerald-200 rounded-2xl p-3 flex items-center justify-between">
         <div class="flex items-center space-x-2.5">
-          <div class="w-8 h-8 rounded-full bg-green-200 text-green-800 flex items-center justify-center text-sm">
-            <i class="fas fa-crosshairs"></i>
+          <div class="w-8 h-8 rounded-full bg-emerald-200 text-emerald-800 flex items-center justify-center text-sm">
+            <?= renderIcon('map-pin', 'w-4 h-4 text-emerald-800') ?>
           </div>
           <div>
-            <div class="text-xs font-bold text-green-900">Use Current Location</div>
-            <div class="text-[11px] text-green-700">Detect your GPS location</div>
+            <div class="text-xs font-black text-emerald-950">Use Current Location</div>
+            <div class="text-[11px] text-emerald-700 font-medium">Detect your GPS location</div>
           </div>
         </div>
-        <button type="button" onclick="detectGPSLocation()" class="text-xs font-extrabold text-green-800 bg-white px-2.5 py-1 rounded-xl shadow-xs border border-green-300">
+        <button type="button" onclick="detectGPSLocation()" class="text-xs font-extrabold text-emerald-900 bg-white px-3 py-1 rounded-xl shadow-xs border border-emerald-300">
           Detect
         </button>
       </div>
@@ -276,14 +276,14 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Saved Addresses Options (Matches Screenshot 5) -->
       <div class="space-y-2 pt-1" id="saved-address-container">
         <?php foreach ($savedAddresses as $idx => $addr): ?>
-          <label class="block p-3 rounded-2xl border cursor-pointer transition <?= $idx === 0 ? 'border-green-600 bg-green-50/50' : 'border-gray-200 hover:border-gray-300' ?>">
+          <label class="block p-3 rounded-2xl border cursor-pointer transition <?= $idx === 0 ? 'border-emerald-600 bg-emerald-50/50' : 'border-gray-200 hover:border-gray-300' ?>">
             <div class="flex items-start space-x-3">
-              <input type="radio" name="address_index" value="<?= $idx ?>" <?= $idx === 0 ? 'checked' : '' ?> class="mt-1 text-green-600 focus:ring-green-500">
+              <input type="radio" name="address_index" value="<?= $idx ?>" <?= $idx === 0 ? 'checked' : '' ?> class="mt-1 text-emerald-600 focus:ring-emerald-500">
               <div class="flex-1 min-w-0">
                 <div class="flex items-center space-x-2">
-                  <span class="text-xs font-bold text-gray-900"><?= e($addr['type']) ?></span>
+                  <span class="text-xs font-black text-gray-900"><?= e($addr['type']) ?></span>
                   <?php if (!empty($addr['is_default'])): ?>
-                    <span class="text-[10px] bg-green-200 text-green-800 font-extrabold px-1.5 py-0.2 rounded">Default</span>
+                    <span class="text-[9px] bg-emerald-200 text-emerald-900 font-black px-1.5 py-0.2 rounded">Default</span>
                   <?php endif; ?>
                 </div>
                 <div class="text-xs text-gray-600 mt-0.5 leading-snug">
@@ -298,47 +298,47 @@ require_once __DIR__ . '/includes/header.php';
       <!-- Add New Custom Address Accordion -->
       <div id="custom-address-fields" class="hidden space-y-2 pt-2 border-t border-gray-100">
         <label class="block text-xs font-bold text-gray-700">Enter Complete Address:</label>
-        <textarea name="delivery_address_custom" rows="2" placeholder="House/Flat No, Landmark, Street Name" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-800 focus:bg-white focus:border-green-600"></textarea>
+        <textarea name="delivery_address_custom" rows="2" placeholder="House/Flat No, Landmark, Street Name" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs text-gray-800 focus:bg-white focus:border-emerald-600"></textarea>
         <div class="grid grid-cols-2 gap-2">
-          <input type="text" name="delivery_pincode_custom" placeholder="Pincode (e.g. 452001)" value="452001" class="bg-gray-50 border border-gray-200 rounded-xl p-2 text-xs text-gray-800 focus:bg-white focus:border-green-600">
+          <input type="text" name="delivery_pincode_custom" placeholder="Pincode (e.g. 452001)" value="452001" class="bg-gray-50 border border-gray-200 rounded-xl p-2 text-xs text-gray-800 focus:bg-white focus:border-emerald-600">
           <input type="text" placeholder="Indore, MP" value="Indore, MP" readonly class="bg-gray-100 border border-gray-200 rounded-xl p-2 text-xs text-gray-500">
         </div>
       </div>
     </div>
 
     <!-- 2. Payment Method Card (Matches Screenshot 6) -->
-    <div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm space-y-3">
+    <div class="bg-white rounded-3xl p-4 border border-gray-150 shadow-xs space-y-3">
       <h2 class="text-sm font-black text-gray-900 flex items-center space-x-2">
-        <i class="fas fa-credit-card text-green-700"></i>
+        <?= renderIcon('shopping-bag', 'w-4 h-4 text-emerald-700') ?>
         <span>Payment Method</span>
       </h2>
 
       <div class="space-y-2">
         
         <!-- UPI / QR (Selected in Screenshot 6) -->
-        <label class="block p-3 rounded-2xl border border-green-600 bg-green-50/50 cursor-pointer payment-method-card transition">
+        <label class="block p-3 rounded-2xl border border-emerald-600 bg-emerald-50/50 cursor-pointer payment-method-card transition">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-bold text-sm">
-                <i class="fas fa-qrcode"></i>
+              <div class="w-9 h-9 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center font-black text-xs">
+                UPI
               </div>
               <div>
                 <div class="text-xs font-black text-gray-900">UPI / QR Code</div>
                 <div class="text-[11px] text-gray-500">GPay, PhonePe, Paytm, etc.</div>
               </div>
             </div>
-            <input type="radio" name="payment_method" value="upi_qr" checked class="text-green-600 focus:ring-green-500">
+            <input type="radio" name="payment_method" value="upi_qr" checked class="text-emerald-600 focus:ring-emerald-500">
           </div>
           <!-- UPI QR Details Expand -->
-          <div id="upi-details-box" class="mt-3 pt-3 border-t border-green-200/60 text-xs text-gray-700 space-y-2">
-            <div class="bg-white p-3 rounded-xl border border-green-200 flex items-center justify-between">
+          <div id="upi-details-box" class="mt-3 pt-3 border-t border-emerald-200/60 text-xs text-gray-700 space-y-2">
+            <div class="bg-white p-3 rounded-xl border border-emerald-200 flex items-center justify-between">
               <div>
                 <div class="text-[10px] text-gray-400 font-bold uppercase">UPI ID / VPA</div>
-                <div class="font-extrabold text-green-900"><?= e(getSetting('upi_id', 'nafresh@icici')) ?></div>
+                <div class="font-extrabold text-emerald-950"><?= e(getSetting('upi_id', 'nafresh@icici')) ?></div>
               </div>
-              <button type="button" onclick="navigator.clipboard.writeText('<?= e(getSetting('upi_id', 'nafresh@icici')) ?>');showToast('UPI ID copied!')" class="text-xs font-bold bg-green-100 text-green-800 px-2.5 py-1 rounded-lg">Copy</button>
+              <button type="button" onclick="navigator.clipboard.writeText('<?= e(getSetting('upi_id', 'nafresh@icici')) ?>');showToast('UPI ID copied!')" class="text-xs font-bold bg-emerald-100 text-emerald-900 px-2.5 py-1 rounded-lg">Copy</button>
             </div>
-            <input type="text" name="upi_reference" placeholder="Enter 12-digit UPI UTR / Transaction Ref (after payment)" class="w-full bg-white border border-gray-300 rounded-xl p-2 text-xs text-gray-800 focus:border-green-600">
+            <input type="text" name="upi_reference" placeholder="Enter 12-digit UPI UTR / Transaction Ref (after payment)" class="w-full bg-white border border-gray-300 rounded-xl p-2 text-xs text-gray-800 focus:border-emerald-600">
           </div>
         </label>
 
@@ -346,15 +346,15 @@ require_once __DIR__ . '/includes/header.php';
         <label class="block p-3 rounded-2xl border border-gray-200 hover:border-gray-300 cursor-pointer payment-method-card transition">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">
-                <i class="fas fa-wallet"></i>
+              <div class="w-9 h-9 rounded-xl bg-blue-100 text-blue-700 flex items-center justify-center font-black text-xs">
+                RZP
               </div>
               <div>
                 <div class="text-xs font-black text-gray-900">Razorpay</div>
                 <div class="text-[11px] text-gray-500">Cards, UPI, Netbanking</div>
               </div>
             </div>
-            <input type="radio" name="payment_method" value="razorpay" class="text-green-600 focus:ring-green-500">
+            <input type="radio" name="payment_method" value="razorpay" class="text-emerald-600 focus:ring-emerald-500">
           </div>
         </label>
 
@@ -362,15 +362,15 @@ require_once __DIR__ . '/includes/header.php';
         <label class="block p-3 rounded-2xl border border-gray-200 hover:border-gray-300 cursor-pointer payment-method-card transition">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-sm">
-                <i class="fas fa-money-bill-wave"></i>
+              <div class="w-9 h-9 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-black text-xs">
+                COD
               </div>
               <div>
                 <div class="text-xs font-black text-gray-900">Cash on Delivery</div>
                 <div class="text-[11px] text-gray-500">Pay at your doorstep</div>
               </div>
             </div>
-            <input type="radio" name="payment_method" value="cod" class="text-green-600 focus:ring-green-500">
+            <input type="radio" name="payment_method" value="cod" class="text-emerald-600 focus:ring-emerald-500">
           </div>
         </label>
 
@@ -378,15 +378,15 @@ require_once __DIR__ . '/includes/header.php';
         <label class="block p-3 rounded-2xl border border-gray-200 hover:border-gray-300 cursor-pointer payment-method-card transition">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-3">
-              <div class="w-9 h-9 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center font-bold text-sm">
-                <i class="fas fa-university"></i>
+              <div class="w-9 h-9 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center font-black text-xs">
+                BANK
               </div>
               <div>
                 <div class="text-xs font-black text-gray-900">Bank Transfer</div>
                 <div class="text-[11px] text-gray-500">Direct Bank Transfer</div>
               </div>
             </div>
-            <input type="radio" name="payment_method" value="bank_transfer" class="text-green-600 focus:ring-green-500">
+            <input type="radio" name="payment_method" value="bank_transfer" class="text-emerald-600 focus:ring-emerald-500">
           </div>
         </label>
 
@@ -394,10 +394,10 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 
     <!-- 3. Order Items Summary (Matches Screenshot 7) -->
-    <div class="bg-white rounded-3xl p-4 border border-gray-100 shadow-sm space-y-3">
+    <div class="bg-white rounded-3xl p-4 border border-gray-150 shadow-xs space-y-3">
       <div class="flex items-center justify-between">
         <h2 class="text-sm font-black text-gray-900">Order Items</h2>
-        <a href="/cart.php" class="text-xs font-bold text-green-700 hover:underline">Edit</a>
+        <a href="/cart.php" class="text-xs font-bold text-emerald-700 hover:underline">Edit</a>
       </div>
 
       <div class="divide-y divide-gray-100">
@@ -406,11 +406,11 @@ require_once __DIR__ . '/includes/header.php';
             <div class="flex items-center space-x-2.5">
               <img src="<?= e($item['image']) ?>" alt="<?= e($item['name']) ?>" class="w-10 h-10 rounded-xl object-cover bg-gray-50">
               <div>
-                <div class="text-xs font-bold text-gray-900"><?= e($item['name']) ?></div>
+                <div class="text-xs font-black text-gray-900"><?= e($item['name']) ?></div>
                 <div class="text-[11px] text-gray-500"><?= formatPrice($item['price']) ?> / <?= e($item['unit_name']) ?></div>
               </div>
             </div>
-            <div class="text-xs font-extrabold text-gray-900">
+            <div class="text-xs font-black text-gray-900">
               x<?= (int)$item['quantity'] ?>
             </div>
           </div>
@@ -419,33 +419,33 @@ require_once __DIR__ . '/includes/header.php';
 
       <!-- Financial Totals (Matches Screenshot 7) -->
       <div class="pt-2 border-t border-gray-100 space-y-2 text-xs">
-        <div class="flex items-center justify-between text-gray-600 font-medium">
+        <div class="flex items-center justify-between text-gray-500 font-medium">
           <span>Subtotal</span>
-          <span class="font-bold text-gray-900"><?= formatPrice($cartData['subtotal']) ?></span>
+          <span class="font-black text-gray-900"><?= formatPrice($cartData['subtotal']) ?></span>
         </div>
-        <div class="flex items-center justify-between text-gray-600 font-medium">
+        <div class="flex items-center justify-between text-gray-500 font-medium">
           <span>Delivery Charge</span>
-          <span class="font-bold text-gray-900"><?= formatPrice($cartData['delivery_fee']) ?></span>
+          <span class="font-black text-gray-900"><?= formatPrice($cartData['delivery_fee']) ?></span>
         </div>
         <?php if ($cartData['discount_amount'] > 0): ?>
-          <div class="flex items-center justify-between text-green-700 font-medium">
+          <div class="flex items-center justify-between text-emerald-700 font-medium">
             <span>Discount</span>
             <span class="font-bold">- <?= formatPrice($cartData['discount_amount']) ?></span>
           </div>
         <?php endif; ?>
         <div class="pt-2 border-t border-gray-100 flex items-center justify-between font-black text-sm text-gray-900">
           <span>Total</span>
-          <span class="text-base text-green-900"><?= formatPrice($cartData['total']) ?></span>
+          <span class="text-base text-emerald-950"><?= formatPrice($cartData['total']) ?></span>
         </div>
       </div>
 
       <!-- Estimated Delivery Time Card (Matches Screenshot 7) -->
-      <div class="bg-green-50 border border-green-200/80 rounded-2xl p-3 flex items-center justify-between text-xs">
+      <div class="bg-emerald-50 border border-emerald-200/80 rounded-2xl p-3 flex items-center justify-between text-xs">
         <div class="flex items-center space-x-2">
-          <i class="fas fa-clock text-green-700"></i>
+          <?= renderIcon('clock', 'w-4 h-4 text-emerald-700') ?>
           <div>
-            <span class="text-[10px] text-gray-500 block">Estimated Delivery Time</span>
-            <span class="font-extrabold text-green-900">30 - 45 minutes</span>
+            <span class="text-[10px] text-gray-500 block font-medium">Estimated Delivery Time</span>
+            <span class="font-black text-emerald-950">30 - 45 minutes</span>
           </div>
         </div>
         <span class="text-2xl">🛵</span>
@@ -457,7 +457,7 @@ require_once __DIR__ . '/includes/header.php';
       <button type="submit" 
               name="action_place_order" 
               value="1" 
-              class="w-full bg-green-700 hover:bg-green-800 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center space-x-2 text-base">
+              class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-extrabold py-4 px-6 rounded-2xl shadow-lg transition transform active:scale-95 flex items-center justify-center space-x-2 text-base">
         <span>Place Order</span>
       </button>
     </div>

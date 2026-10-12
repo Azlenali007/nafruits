@@ -21,12 +21,15 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   <meta name="description" content="Na Fresh delivers premium orchard-fresh fruits and natural tender coconut water right to your doorstep in minutes.">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🥥</text></svg>">
   
-  <!-- Tailwind CSS via reliable CDN for production/server-rendered deployment -->
+  <!-- Tailwind CSS via reliable CDN -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
   
-  <!-- Font Awesome 6 Icons -->
+  <!-- Font Awesome 6 Icons (as fallback) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+  <!-- Lucide Icons for clean, consistent stroke-based SVG icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
   <!-- SweetAlert2 for mobile-friendly modals & toasts -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   
@@ -35,7 +38,7 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 </head>
 <body class="bg-gray-50 text-gray-800 antialiased selection:bg-green-100 selection:text-green-800 min-h-screen flex flex-col">
 
-  <!-- 1. Branded Intro Splash (Matching First Screen of Reference Image) -->
+  <!-- 1. Branded Intro Splash -->
   <?php if ($currentPath === '/' || $currentPath === '/index.php'): ?>
   <div id="brand-splash" class="fixed inset-0 z-50 flex flex-col items-center justify-between p-8 text-white select-none">
     <div class="w-full flex justify-end pt-4">
@@ -65,40 +68,40 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   </div>
   <?php endif; ?>
 
-  <!-- 2. Sticky Compact Mobile Header (Matching Second Screen of Reference Image) -->
-  <header class="sticky top-0 z-40 bg-white border-b border-gray-100 shadow-sm transition-all duration-200">
+  <!-- 2. Sticky Compact Mobile Header (Matching Reference Image) -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all duration-200">
     <div class="max-w-md mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl px-4 py-2.5 flex items-center justify-between">
       
       <!-- Logo & Brand Identity -->
       <a href="/index.php" class="flex items-center space-x-2 group">
-        <div class="w-9 h-9 rounded-xl bg-green-50 flex items-center justify-center text-green-700 border border-green-200 group-hover:scale-105 transition-transform">
-          <i class="fas fa-seedling text-lg text-green-600"></i>
+        <div class="w-9 h-9 rounded-2xl bg-emerald-50 flex items-center justify-center text-emerald-700 border border-emerald-100 group-hover:scale-105 transition-transform shadow-xs">
+          <?= renderIcon('leaf', 'w-5 h-5 text-emerald-700') ?>
         </div>
         <div>
           <div class="flex items-center">
-            <span class="text-xl font-extrabold tracking-tight text-green-800 leading-none">Na Fresh</span>
-            <span class="text-xs text-green-600 ml-1 font-bold">🌴</span>
+            <span class="text-xl font-black tracking-tight text-emerald-950 leading-none">Na Fresh</span>
+            <span class="text-xs text-emerald-600 ml-1 font-bold">🌴</span>
           </div>
-          <span class="text-[10px] text-gray-500 font-semibold tracking-wider block -mt-0.5">FRUITS & COCONUTS</span>
+          <span class="text-[9px] text-gray-400 font-bold tracking-wider block uppercase mt-0.5">Fruits & Coconuts</span>
         </div>
       </a>
 
-      <!-- Right Action Icons: Search, User, Cart -->
-      <div class="flex items-center space-x-2.5">
+      <!-- Right Action Icons: Search, User, Cart (Consistent Professional Stroke Icons) -->
+      <div class="flex items-center space-x-2">
         <!-- Search Button -->
-        <a href="/category.php" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-green-50 flex items-center justify-center text-gray-700 hover:text-green-700 transition" title="Search Fruits">
-          <i class="fas fa-search text-sm"></i>
+        <a href="/category.php" class="w-9 h-9 rounded-full bg-gray-50 hover:bg-emerald-50 border border-gray-150 flex items-center justify-center text-gray-700 hover:text-emerald-700 transition" title="Search Fruits">
+          <?= renderIcon('search', 'w-4 h-4 text-gray-700') ?>
         </a>
 
         <!-- User Profile Button -->
-        <a href="<?= $currentCustomer ? '/account.php' : '/login.php' ?>" class="w-9 h-9 rounded-full bg-gray-100 hover:bg-green-50 flex items-center justify-center text-gray-700 hover:text-green-700 transition" title="<?= $currentCustomer ? e($currentCustomer['name']) : 'Login / Register' ?>">
-          <i class="fas fa-user text-sm"></i>
+        <a href="<?= $currentCustomer ? '/account.php' : '/login.php' ?>" class="w-9 h-9 rounded-full bg-gray-50 hover:bg-emerald-50 border border-gray-150 flex items-center justify-center text-gray-700 hover:text-emerald-700 transition" title="<?= $currentCustomer ? e($currentCustomer['name']) : 'Login / Register' ?>">
+          <?= renderIcon('user', 'w-4 h-4 text-gray-700') ?>
         </a>
 
         <!-- Cart Icon with live badge count -->
-        <a href="/cart.php" class="relative w-9 h-9 rounded-full bg-gray-100 hover:bg-green-50 flex items-center justify-center text-gray-700 hover:text-green-700 transition" title="View Cart">
-          <i class="fas fa-shopping-bag text-sm"></i>
-          <span class="cart-badge-count absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center <?= $cartCount > 0 ? '' : 'hidden' ?>">
+        <a href="/cart.php" class="relative w-9 h-9 rounded-full bg-gray-50 hover:bg-emerald-50 border border-gray-150 flex items-center justify-center text-gray-700 hover:text-emerald-700 transition" title="View Cart">
+          <?= renderIcon('shopping-bag', 'w-4 h-4 text-gray-700') ?>
+          <span class="cart-badge-count absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-extrabold w-4 h-4 rounded-full flex items-center justify-center shadow-xs <?= $cartCount > 0 ? '' : 'hidden' ?>">
             <?= $cartCount ?>
           </span>
         </a>
@@ -106,13 +109,13 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     </div>
 
     <!-- Location Bar Bar -->
-    <div class="bg-green-50/70 border-t border-green-100/60 px-4 py-1 text-xs text-green-900 flex items-center justify-between max-w-md mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl">
+    <div class="bg-emerald-50/70 border-t border-emerald-100/60 px-4 py-1.5 text-xs text-emerald-950 flex items-center justify-between max-w-md mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl">
       <div class="flex items-center space-x-1.5 truncate">
-        <i class="fas fa-map-marker-alt text-green-600"></i>
-        <span class="font-medium text-gray-600">Delivering in:</span>
-        <span class="font-bold text-green-800 truncate">Indore, MP (30-45 mins)</span>
+        <?= renderIcon('map-pin', 'w-3.5 h-3.5 text-emerald-600 flex-shrink-0') ?>
+        <span class="font-medium text-gray-500 text-[11px]">Delivering in:</span>
+        <span class="font-bold text-emerald-900 truncate text-[11px]">Indore, MP (30-45 mins)</span>
       </div>
-      <a href="/checkout.php" class="text-[11px] font-bold text-green-700 hover:underline flex-shrink-0">Change</a>
+      <a href="/checkout.php" class="text-[11px] font-bold text-emerald-700 hover:text-emerald-800 hover:underline flex-shrink-0 ml-2">Change</a>
     </div>
   </header>
 
@@ -120,7 +123,7 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   <?php if (hasFlashes()): ?>
     <div class="max-w-md mx-auto sm:max-w-xl md:max-w-3xl lg:max-w-5xl px-4 pt-3">
       <?php foreach (getFlashes() as $flash): ?>
-        <div class="p-3 mb-2 rounded-xl text-sm font-medium flex items-center justify-between <?= $flash['type'] === 'error' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-green-50 text-green-800 border border-green-200' ?>">
+        <div class="p-3 mb-2 rounded-2xl text-xs font-bold flex items-center justify-between <?= $flash['type'] === 'error' ? 'bg-red-50 text-red-700 border border-red-200' : 'bg-emerald-50 text-emerald-800 border border-emerald-200' ?>">
           <span><?= e($flash['message']) ?></span>
           <button onclick="this.parentElement.remove()" class="text-gray-400 hover:text-gray-600">&times;</button>
         </div>
@@ -129,4 +132,4 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   <?php endif; ?>
 
   <!-- Main Content Container with bottom padding so bottom nav doesn't overlap -->
-  <main class="flex-1 pb-24">
+  <main class="flex-1 pb-28 md:pb-20">
